@@ -19,7 +19,9 @@ namespace _2025_04_02_GameFramework
 			{
 				return attacker.AttackItems[0].GetDamage(attacker, target);
 			}
+
 			return 0;
+
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace _2025_04_02_GameFramework
 	/// <summary>
 	/// Decorator for attack-objekter, som booster angrebsdamagen.
 	/// </summary>
-	public class AttackDecorator : AttackObject
+	public class AttackDecorator : AttackObject // IAttact istedet for AttackObject selvom den er implementeret i AttackObject.
 	{
 		private readonly IAttack _innerAttack;
 		private readonly int _bonusDamage;
@@ -27,11 +27,7 @@ namespace _2025_04_02_GameFramework
 		public override int GetDamage(Creature attacker, Creature target)
 		{
 			int baseDamage = _innerAttack.GetDamage(attacker, target);
-			// Hvis angriberen har lav hitpoints, reducer bonus.
-			if (attacker.HitPoints < 0.25 * 100) // Forudsætter en basis-max HP på 100.
-			{
-				return baseDamage;
-			}
+		
 			return baseDamage + _bonusDamage;
 		}
 	}

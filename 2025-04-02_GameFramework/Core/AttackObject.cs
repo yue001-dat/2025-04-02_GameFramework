@@ -25,7 +25,6 @@ namespace _2025_04_02_GameFramework.Core
 
 		public virtual int GetDamage(Creature attacker, Creature target)
 		{
-			// Standard implementering: returner basisdamage.
 			return Damage;
 		}
 	}

@@ -10,7 +10,6 @@ namespace _2025_04_02_GameFramework.Core
 {
 	/// <summary>
 	/// Abstrakt baseklasse, der repræsenterer en creature i spillet.
-	/// Demonstrerer Template Method-mønsteret.
 	/// </summary>
 	public abstract class Creature
 	{
@@ -22,7 +21,6 @@ namespace _2025_04_02_GameFramework.Core
 
 		/// <summary>
 		/// Event der udløses, når creature modtager et hit.
-		/// Implementerer Observer-mønsteret.
 		/// </summary>
 		public event EventHandler<int> OnHit;
 
@@ -95,16 +93,20 @@ namespace _2025_04_02_GameFramework.Core
 		/// </summary>
 		public virtual void ReceiveHit(int damage)
 		{
-			// Anvend forsvarsobjekternes skade-reduktion.
 			int totalReduction = 0;
 			foreach (var defence in DefenceItems)
 			{
 				totalReduction += defence.DamageReduction;
 			}
+
 			int actualDamage = Math.Max(0, damage - totalReduction);
+
 			HitPoints -= actualDamage;
+
 			Logger.Log($"{Name} received {actualDamage} damage after defence. Remaining hit points: {HitPoints}");
+
 			OnHit?.Invoke(this, actualDamage);
+
 			if (HitPoints <= 0)
 			{
 				Logger.Log($"{Name} has died.");
@@ -125,15 +127,6 @@ namespace _2025_04_02_GameFramework.Core
 			{
 				DefenceItems.Add(defence);
 			}
-		}
-
-		/// <summary>
-		/// Operator overload, der gør det muligt for en creature at loote et objekt med '+' operatoren.
-		/// </summary>
-		public static Creature operator +(Creature creature, WorldObject obj)
-		{
-			creature.Loot(obj);
-			return creature;
 		}
 	}
 }

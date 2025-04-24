@@ -10,10 +10,10 @@ namespace GameDemo
     {
         static void Main(string[] args)
         {
-            // Opsæt logging til konsollen.
+            // Loggging
             Logger.AddListener(new ConsoleTraceListener());
 
-            // Indlæs konfiguration fra XML-filen.
+            // Config
             GameConfiguration config = null;
 
             try
@@ -26,19 +26,21 @@ namespace GameDemo
                 return;
             }
 
-            // Opret spillverdenen baseret på konfigurationen.
+            // Opret verden
             World world = new World(config.WorldWidth, config.WorldHeight);
 
-            // Opret creatures.
-            Creature warrior = new Warrior("Conan", 100, new Point(10, 10));
+			// Opret creatures
+			Creature warrior = new Warrior("Conan", 100, new Point(10, 10));
             Creature mage = new Mage("Merlin", 80, new Point(15, 15));
 
             world.AddCreature(warrior);
             world.AddCreature(mage);
 
-            // Opret et attack-objekt (sværd) og tilføj det som et bonus-objekt i verdenen.
+            // Opret et attack-objekt (sværd)
             AttackObject sword = new AttackObject(15, 1, "Sword");
-            world.AddObject(new BonusObject(new Point(10, 10), true, "Sword Bonus", sword));
+     
+			// og tilføj som tilføj det som et bonus-objekt i verdenen.
+			world.AddObject(new BonusObject(new Point(10, 10), true, "Sword Bonus", sword));
 
             // Opret et defence-objekt (skjold) og tilføj det til verdenen.
             DefenceObject shield = new DefenceObject(new Point(15, 15), true, "Shield", 5);
@@ -60,10 +62,7 @@ namespace GameDemo
                 creature.PerformTurn(world);
             }
 
-            // Demonstrer operator overload for looting: warrior looter skjoldet.
-            warrior = warrior + shield;
-
-            Console.WriteLine("Simulation complete. Press any key to exit.");
+            Console.WriteLine("Done.");
             Console.ReadKey();
         }
     }

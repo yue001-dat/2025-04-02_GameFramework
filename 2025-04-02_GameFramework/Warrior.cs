@@ -22,8 +22,9 @@ namespace _2025_04_02_GameFramework
 
 		protected override void ExecuteTurn(World world)
 		{
-			// For demonstration: angrib den første enemy creature, der ikke er denne.
+		
 			Creature target = null;
+
 			foreach (var creature in world.Creatures)
 			{
 				if (creature != this)
